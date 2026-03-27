@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 10" width="90" height="100">
+  <style>
+    .apple-bob {
+      transform-origin: 4.5px 5px;
+      animation: bob 2s infinite ease-in-out;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-1px); }
+    }
+  </style>
+  <g class="apple-bob">
+    <!-- Stem -->
+    <rect x="4" y="0" width="1" height="2" fill="#5D4037"/>
+    <!-- Leaf -->
+    <rect x="5" y="1" width="1" height="1" fill="#4CAF50"/>
+    <rect x="6" y="0" width="1" height="1" fill="#4CAF50"/>
+    <!-- Apple body -->
+    <rect x="2" y="2" width="5" height="1" fill="#E53935"/>
+    <rect x="1" y="3" width="7" height="4" fill="#E53935"/>
+    <rect x="2" y="7" width="5" height="1" fill="#E53935"/>
+    <!-- Highlight -->
+    <rect x="2" y="3" width="1" height="2" fill="#EF5350"/>
+  </g>
+</svg>

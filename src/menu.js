@@ -171,6 +171,10 @@ module.exports = function initMenu(ctx) {
         click: () => ctx.doNotDisturb ? ctx.disableDoNotDisturb() : ctx.enableDoNotDisturb(),
       },
       {
+        label: ctx.lang === "zh" ? "喂苹果 (⌘⇧A)" : "Feed Apple (⌘⇧A)",
+        click: () => { if (ctx.spawnApple) ctx.spawnApple(); },
+      },
+      {
         label: t("bubbleFollow"),
         type: "checkbox",
         checked: ctx.bubbleFollowPet,

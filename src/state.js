@@ -225,8 +225,15 @@ function applyState(state, svgOverride) {
   } else if (state === "waking") {
     autoReturnTimer = setTimeout(() => {
       autoReturnTimer = null;
-      const resolved = resolveDisplayState();
-      applyState(resolved, getSvgOverride(resolved));
+      if (ctx.wanderToRandomPosition) {
+        ctx.wanderToRandomPosition(() => {
+          const resolved = resolveDisplayState();
+          applyState(resolved, getSvgOverride(resolved));
+        });
+      } else {
+        const resolved = resolveDisplayState();
+        applyState(resolved, getSvgOverride(resolved));
+      }
     }, WAKE_DURATION);
   } else if (AUTO_RETURN_MS[state]) {
     autoReturnTimer = setTimeout(() => {

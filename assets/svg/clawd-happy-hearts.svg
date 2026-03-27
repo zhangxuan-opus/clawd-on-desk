@@ -105,29 +105,25 @@
       }
     </style>
 
-    <!-- Reusable Pixel Art Sparkle Definition -->
-    <g id="px-sparkle">
-      <!-- Center pixel -->
-      <rect class="spark-center" x="-0.5" y="-0.5" width="1" height="1" />
-      <!-- Outer 4 pixels forming the cross -->
-      <path class="spark-outer" d="M -0.5,-1.5 h1 v1 h-1 z
-                                   M -0.5,0.5 h1 v1 h-1 z
-                                   M -1.5,-0.5 h1 v1 h-1 z
-                                   M 0.5,-0.5 h1 v1 h-1 z" />
+    <!-- Pixel heart shape -->
+    <g id="px-heart">
+      <rect class="spark-center" x="-1.5" y="-0.5" width="1" height="1"/>
+      <rect class="spark-center" x="0.5" y="-0.5" width="1" height="1"/>
+      <rect class="spark-outer" x="-1.5" y="0.5" width="3" height="1"/>
+      <rect class="spark-outer" x="-0.5" y="1.5" width="1" height="1"/>
     </g>
   </defs>
 
   <!-- Ground Shadow -->
   <rect id="ground-shadow" class="shadow-anim" x="3" y="15" width="9" height="1" fill="#000000"/>
 
-  <!-- Pixel-Art Sparkle Particles Group -->
+  <!-- Floating Hearts -->
   <g class="sparkles">
-    <use href="#px-sparkle" x="-4" y="-2" fill="#FFD700" style="--delay: 0.0s"/>
-    <use href="#px-sparkle" x="18" y="-4" fill="#FFA000" style="--delay: 0.3s"/>
-    <use href="#px-sparkle" x="20" y="10" fill="#FFF59D" style="--delay: 0.6s"/>
-    <use href="#px-sparkle" x="-6" y="12" fill="#FFC107" style="--delay: 0.9s"/>
-    <use href="#px-sparkle" x="7" y="-8" fill="#FFF59D" style="--delay: 1.2s"/>
-    <use href="#px-sparkle" x="-2" y="6" fill="#FFD700" style="--delay: 0.7s"/>
+    <use href="#px-heart" x="-3" y="-2" fill="#FF6B9D" style="--delay: 0.0s"/>
+    <use href="#px-heart" x="18" y="-4" fill="#FF8FB1" style="--delay: 0.4s"/>
+    <use href="#px-heart" x="19" y="8" fill="#FF6B9D" style="--delay: 0.8s"/>
+    <use href="#px-heart" x="-5" y="10" fill="#FF8FB1" style="--delay: 1.2s"/>
+    <use href="#px-heart" x="8" y="-7" fill="#FF6B9D" style="--delay: 0.6s"/>
   </g>
 
   <!-- Main Animated Character -->

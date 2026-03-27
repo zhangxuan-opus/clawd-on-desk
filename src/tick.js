@@ -18,7 +18,7 @@ let lastEyeDx = 0, lastEyeDy = 0;
 let mainTickTimer = null;
 
 const MOUSE_IDLE_TIMEOUT = 20000;   // 20s → idle-look
-const MOUSE_SLEEP_TIMEOUT = 60000;  // 60s → yawning → dozing
+const MOUSE_SLEEP_TIMEOUT = 120000; // 2min → yawning → dozing
 const IDLE_LOOK_DURATION = 10000;  // idle-look CSS loop is 10s
 const SVG_IDLE_FOLLOW = "clawd-idle-follow.svg";
 const SVG_IDLE_LOOK = "clawd-idle-look.svg";
@@ -120,8 +120,11 @@ function startMainTick() {
         mouseStillSince = Date.now();
       }
 
-      // 60s no mouse movement → yawning → dozing
-      if (!hasTriggeredYawn && elapsed >= MOUSE_SLEEP_TIMEOUT) {
+      // 2min no mouse movement → yawning → dozing
+      // Skip if crab is currently walking or doing a fidget
+      if (!hasTriggeredYawn && elapsed >= MOUSE_SLEEP_TIMEOUT
+          && ctx.currentSvg !== "clawd-mini-crabwalk.svg"
+          && ctx.currentSvg !== "clawd-happy-hearts.svg") {
         hasTriggeredYawn = true;
         if (!isMouseIdle) ctx.sendToRenderer("eye-move", 0, 0);
         yawnDelayTimer = setTimeout(() => {
@@ -132,7 +135,9 @@ function startMainTick() {
       }
 
       // 20s no mouse movement → idle-look (play once, then return)
-      if (!isMouseIdle && !hasTriggeredYawn && !idleLookPlayed && elapsed >= MOUSE_IDLE_TIMEOUT) {
+      // Skip if crab is currently walking (crabwalk animation)
+      if (!isMouseIdle && !hasTriggeredYawn && !idleLookPlayed && elapsed >= MOUSE_IDLE_TIMEOUT
+          && ctx.currentSvg !== "clawd-mini-crabwalk.svg") {
         isMouseIdle = true;
         idleLookPlayed = true;
         ctx.sendToRenderer("eye-move", 0, 0);

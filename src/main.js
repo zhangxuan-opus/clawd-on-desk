@@ -170,7 +170,26 @@ const _stateCtx = {
   buildContextMenu: () => buildContextMenu(),
   buildTrayMenu: () => buildTrayMenu(),
 };
+// ── Wander — delegated to src/wander.js ──
+const _wanderCtx = {
+  get win() { return win; },
+  syncHitWin,
+  sendToRenderer,
+};
+const _wander = require("./wander")(_wanderCtx);
+_stateCtx.wanderToRandomPosition = _wander.wanderToRandomPosition;
+
+// ── Apple feeding — delegated to src/apple.js ──
+const _appleCtx = {
+  get win() { return win; },
+  syncHitWin,
+  sendToRenderer,
+};
+const _apple = require("./apple")(_appleCtx);
+
 const _state = require("./state")(_stateCtx);
+
+_wanderCtx.getCurrentState = () => _state.getCurrentState();
 const { setState, applyState, updateSession, resolveDisplayState, getSvgOverride,
         enableDoNotDisturb, disableDoNotDisturb, startStaleCleanup, stopStaleCleanup,
         startWakePoll, stopWakePoll, detectRunningAgentProcesses, buildSessionSubmenu,
@@ -354,6 +373,7 @@ const _menuCtx = {
   getUpdateMenuItem: () => getUpdateMenuItem(),
   buildSessionSubmenu: () => buildSessionSubmenu(),
   savePrefs,
+  spawnApple: () => _apple.spawnApple(),
   getHookServerPort: () => getHookServerPort(),
   clampToScreen,
   getNearestWorkArea,
@@ -572,6 +592,7 @@ function createWindow() {
   startMainTick();
   startHttpServer();
   startStaleCleanup();
+  _wander.startWanderLoop();
   // Wait for renderer to be ready before sending initial state
   // If hooks arrived during startup, respect them instead of forcing idle
   // Also handles crash recovery (render-process-gone → reload)
@@ -793,6 +814,9 @@ if (!gotTheLock) {
       console.warn("Clawd: failed to auto-install terminal-focus extension:", err.message);
     }
 
+    // Register apple feeding shortcut (Cmd+Shift+A)
+    _apple.registerShortcut();
+
     // Auto-updater: setup event handlers + silent check after 5s
     setupAutoUpdater();
     setTimeout(() => checkForUpdates(false), 5000);
@@ -806,6 +830,8 @@ if (!gotTheLock) {
     _state.cleanup();
     _tick.cleanup();
     _mini.cleanup();
+    _apple.unregisterShortcut();
+    _apple.cleanup();
     if (_codexMonitor) _codexMonitor.stop();
     stopTopmostWatchdog();
     if (hwndRecoveryTimer) { clearTimeout(hwndRecoveryTimer); hwndRecoveryTimer = null; }

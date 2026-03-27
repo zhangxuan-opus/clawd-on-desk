@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500">
+  <defs>
+    <style>
+      .chomp-body {
+        transform-origin: 7.5px 13px;
+        animation: chomp-bounce 0.4s infinite ease-in-out;
+      }
+      .chomp-arms {
+        transform-origin: 7.5px 10px;
+        animation: arms-grab 0.4s infinite ease-in-out;
+      }
+      .happy-eyes {
+        transform-origin: 7.5px 9px;
+        animation: eye-happy 0.8s infinite ease-in-out;
+      }
+      /* Little crumbs flying out */
+      .crumb1 {
+        animation: crumb-fly1 0.6s infinite ease-out;
+      }
+      .crumb2 {
+        animation: crumb-fly2 0.8s infinite ease-out;
+      }
+      .crumb3 {
+        animation: crumb-fly3 0.7s infinite ease-out;
+      }
+
+      @keyframes chomp-bounce {
+        0%, 100% { transform: scale(1, 1) translateY(0); }
+        50% { transform: scale(1.05, 0.95) translateY(0.5px); }
+      }
+      @keyframes arms-grab {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(-5deg); }
+      }
+      @keyframes eye-happy {
+        0%, 100% { transform: scaleY(1); }
+        30%, 70% { transform: scaleY(0.3); }
+      }
+      @keyframes crumb-fly1 {
+        0% { transform: translate(0, 0); opacity: 1; }
+        100% { transform: translate(-4px, -3px); opacity: 0; }
+      }
+      @keyframes crumb-fly2 {
+        0% { transform: translate(0, 0); opacity: 1; }
+        100% { transform: translate(5px, -4px); opacity: 0; }
+      }
+      @keyframes crumb-fly3 {
+        0% { transform: translate(0, 0); opacity: 1; }
+        100% { transform: translate(3px, -2px); opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <rect x="3" y="15" width="9" height="1" fill="#000000" opacity="0.5"/>
+
+  <!-- Crumbs -->
+  <rect class="crumb1" x="1" y="7" width="1" height="1" fill="#E53935" opacity="0.8"/>
+  <rect class="crumb2" x="14" y="6" width="1" height="1" fill="#E53935" opacity="0.8"/>
+  <rect class="crumb3" x="13" y="9" width="1" height="1" fill="#E53935" opacity="0.6"/>
+
+  <!-- Main Body -->
+  <g class="chomp-body">
+    <!-- Legs -->
+    <g fill="#DE886D">
+      <rect x="3" y="11" width="1" height="4"/>
+      <rect x="5" y="11" width="1" height="4"/>
+      <rect x="9" y="11" width="1" height="4"/>
+      <rect x="11" y="11" width="1" height="4"/>
+    </g>
+
+    <!-- Torso -->
+    <rect x="2" y="6" width="11" height="7" fill="#DE886D"/>
+
+    <!-- Arms holding inward -->
+    <rect x="0" y="8" width="2" height="2" fill="#DE886D"/>
+    <rect x="13" y="8" width="2" height="2" fill="#DE886D"/>
+
+    <!-- >< eyes -->
+    <g class="happy-eyes" fill="#000000">
+      <!-- Left eye > -->
+      <rect x="4" y="8" width="1" height="1"/>
+      <rect x="5" y="9" width="1" height="1"/>
+      <rect x="4" y="10" width="1" height="1"/>
+      <!-- Right eye < -->
+      <rect x="11" y="8" width="1" height="1"/>
+      <rect x="10" y="9" width="1" height="1"/>
+      <rect x="11" y="10" width="1" height="1"/>
+    </g>
+  </g>
+</svg>
