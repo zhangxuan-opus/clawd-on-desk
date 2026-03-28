@@ -18,9 +18,14 @@ let isFeeding  = false;
 function spawnApple() {
   if (isFeeding) return;       // one apple at a time
   if (!ctx.win || ctx.win.isDestroyed()) return;
+  if (ctx.miniMode) return;   // can't feed while tucked into screen edge
 
   const mousePos = screen.getCursorScreenPoint();
   isFeeding = true;
+
+  // Pause wander and idle animations so nothing overrides the crabwalk
+  if (ctx.pauseWander) ctx.pauseWander();
+  ctx.idlePaused = true;
 
   // Create a small transparent window for the apple
   appleWin = new BrowserWindow({
@@ -113,11 +118,13 @@ function startEating() {
   // Switch to eating animation
   if (ctx.sendToRenderer) ctx.sendToRenderer("state-change", "idle", "clawd-eating.svg");
 
-  // After eating, return to idle
+  // After eating, return to idle and resume wander
   eatTimer = setTimeout(() => {
     eatTimer = null;
     if (ctx.sendToRenderer) ctx.sendToRenderer("state-change", "idle", "clawd-idle-follow.svg");
     isFeeding = false;
+    ctx.idlePaused = false;
+    if (ctx.resumeWander) ctx.resumeWander();
   }, EAT_DURATION);
 }
 
@@ -142,6 +149,8 @@ function cleanup() {
   if (eatTimer) { clearTimeout(eatTimer); eatTimer = null; }
   if (appleWin && !appleWin.isDestroyed()) { appleWin.destroy(); appleWin = null; }
   isFeeding = false;
+  ctx.idlePaused = false;
+  if (ctx.resumeWander) ctx.resumeWander();
 }
 
 return { spawnApple, registerShortcut, unregisterShortcut, cleanup };

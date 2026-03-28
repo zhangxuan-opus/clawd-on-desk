@@ -122,12 +122,27 @@ function startWanderLoop() {
   scheduleNextAction();
 }
 
-function cleanup() {
+// Pause the entire wander system (e.g. when apple feeding starts)
+function pause() {
   if (moveTimer)   { clearInterval(moveTimer);   moveTimer   = null; }
-  if (loopTimer)   { clearTimeout(loopTimer);    loopTimer   = null; }
   if (fidgetTimer) { clearTimeout(fidgetTimer);  fidgetTimer = null; }
+  if (loopTimer)   { clearTimeout(loopTimer);    loopTimer   = null; }
+  isWandering = false;
 }
 
-return { wanderToRandomPosition, startWanderLoop, cleanup };
+// Resume the wander loop after a pause
+function resume() {
+  if (!loopTimer) scheduleNextAction();
+}
+
+// Legacy alias
+function interrupt() { pause(); }
+
+function cleanup() {
+  interrupt();
+  if (loopTimer)   { clearTimeout(loopTimer);    loopTimer   = null; }
+}
+
+return { wanderToRandomPosition, startWanderLoop, pause, resume, interrupt, cleanup };
 
 };

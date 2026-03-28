@@ -182,8 +182,12 @@ _stateCtx.wanderToRandomPosition = _wander.wanderToRandomPosition;
 // ── Apple feeding — delegated to src/apple.js ──
 const _appleCtx = {
   get win() { return win; },
+  get miniMode() { return _mini.getMiniMode(); },
   syncHitWin,
   sendToRenderer,
+  pauseWander: () => _wander.pause(),
+  resumeWander: () => _wander.resume(),
+  set idlePaused(v) { idlePaused = v; },
 };
 const _apple = require("./apple")(_appleCtx);
 
