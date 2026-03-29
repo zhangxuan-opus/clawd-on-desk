@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500">
+  <defs>
+    <style>
+      .throw-body {
+        transform-box: fill-box;
+        transform-origin: 50% 100%;
+        animation: throw-effort 1.5s infinite ease-in-out;
+      }
+
+      .shadow-anim {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: shadow-effort 1.5s infinite ease-in-out;
+      }
+
+      .arm-l {
+        transform-box: fill-box;
+        transform-origin: 100% 50%;
+        animation: arm-raise-l 1.5s infinite ease-in-out;
+      }
+      .arm-r {
+        transform-box: fill-box;
+        transform-origin: 0% 50%;
+        animation: arm-raise-r 1.5s infinite ease-in-out;
+      }
+
+      .banana-toss {
+        animation: banana-arc 1.5s infinite ease-in-out;
+      }
+
+      @keyframes throw-effort {
+        0%, 100% { transform: scaleY(1); }
+        15% { transform: scaleY(0.88); }
+        30% { transform: scaleY(1.06); }
+        50% { transform: scaleY(1); }
+      }
+
+      @keyframes shadow-effort {
+        0%, 100% { transform: scaleX(1); opacity: 0.5; }
+        15% { transform: scaleX(1.15); opacity: 0.6; }
+        30% { transform: scaleX(0.85); opacity: 0.4; }
+      }
+
+      @keyframes arm-raise-l {
+        0%  { transform: rotate(0deg); }
+        15% { transform: rotate(30deg); }
+        30% { transform: rotate(85deg) translate(-1px, -3px); }
+        50%, 100% { transform: rotate(20deg); }
+      }
+      @keyframes arm-raise-r {
+        0%  { transform: rotate(0deg); }
+        15% { transform: rotate(-30deg); }
+        30% { transform: rotate(-85deg) translate(1px, -3px); }
+        50%, 100% { transform: rotate(-20deg); }
+      }
+
+      @keyframes banana-arc {
+        0%  { transform: translate(0, 1px) rotate(0deg); opacity: 1; }
+        15% { transform: translate(0, -1px) rotate(10deg); opacity: 1; }
+        30% { transform: translate(1px, -10px) rotate(45deg); opacity: 1; }
+        45% { transform: translate(2px, -18px) rotate(180deg); opacity: 1; }
+        60% { transform: translate(1px, -12px) rotate(270deg); opacity: 1; }
+        75% { transform: translate(0, -2px) rotate(350deg); opacity: 1; }
+        100% { transform: translate(0, 1px) rotate(360deg); opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <rect id="ground-shadow" class="shadow-anim" x="3" y="15" width="9" height="1" fill="#000000"/>
+
+  <!-- Big pixel banana (tossed and spinning) -->
+  <g class="banana-toss">
+    <g transform="translate(4, -3)">
+      <!-- Banana curve shape -->
+      <rect x="1" y="0" width="1" height="1" fill="#8B6914"/>
+      <rect x="2" y="0" width="1" height="1" fill="#FFD600"/>
+      <rect x="3" y="0" width="1" height="1" fill="#FFD600"/>
+      <rect x="4" y="0" width="1" height="1" fill="#FFD600"/>
+      <rect x="5" y="0" width="1" height="1" fill="#FFD600"/>
+      <rect x="1" y="1" width="1" height="1" fill="#FFD600"/>
+      <rect x="2" y="1" width="1" height="1" fill="#FFEA00"/>
+      <rect x="3" y="1" width="1" height="1" fill="#FFEA00"/>
+      <rect x="4" y="1" width="1" height="1" fill="#FFEA00"/>
+      <rect x="0" y="2" width="1" height="1" fill="#FFD600"/>
+      <rect x="1" y="2" width="1" height="1" fill="#FFEA00"/>
+      <rect x="2" y="2" width="1" height="1" fill="#FFD600"/>
+      <rect x="0" y="3" width="1" height="1" fill="#8B6914"/>
+    </g>
+  </g>
+
+  <!-- Main Character -->
+  <g class="throw-body">
+    <g fill="#DE886D">
+      <rect x="3" y="13" width="1" height="2"/>
+      <rect x="5" y="13" width="1" height="2"/>
+      <rect x="9" y="13" width="1" height="2"/>
+      <rect x="11" y="13" width="1" height="2"/>
+      <rect x="2" y="6" width="11" height="7"/>
+      <g class="arm-l"><rect x="0" y="9" width="2" height="2"/></g>
+      <g class="arm-r"><rect x="13" y="9" width="2" height="2"/></g>
+    </g>
+    <!-- >< eyes -->
+    <g fill="#000000">
+      <rect x="4" y="8" width="1" height="1"/>
+      <rect x="5" y="9" width="1" height="1"/>
+      <rect x="4" y="10" width="1" height="1"/>
+      <rect x="11" y="8" width="1" height="1"/>
+      <rect x="10" y="9" width="1" height="1"/>
+      <rect x="11" y="10" width="1" height="1"/>
+    </g>
+  </g>
+</svg>
