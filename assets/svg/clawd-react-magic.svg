@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500">
+  <defs>
+    <style>
+      /* Gentle sway while casting */
+      .magic-body {
+        transform-box: fill-box;
+        transform-origin: 50% 100%;
+        animation: magic-sway 1.5s infinite ease-in-out;
+      }
+
+      .shadow-anim {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: shadow-sway 1.5s infinite ease-in-out;
+      }
+
+      /* Hat wobble */
+      .hat {
+        transform-box: fill-box;
+        transform-origin: 50% 100%;
+        animation: hat-wobble 1.5s infinite ease-in-out;
+      }
+
+      /* Stars twinkling and floating up */
+      .star1 { animation: star-float 1.4s infinite ease-out; animation-delay: 0s; }
+      .star2 { animation: star-float 1.4s infinite ease-out; animation-delay: 0.3s; }
+      .star3 { animation: star-float 1.4s infinite ease-out; animation-delay: 0.6s; }
+      .star4 { animation: star-float 1.4s infinite ease-out; animation-delay: 0.9s; }
+      .star5 { animation: star-float 1.4s infinite ease-out; animation-delay: 1.2s; }
+
+      /* Arms raised for magic */
+      .arm-l {
+        transform-box: fill-box;
+        transform-origin: 100% 50%;
+        animation: arm-magic-l 1.5s infinite ease-in-out;
+      }
+      .arm-r {
+        transform-box: fill-box;
+        transform-origin: 0% 50%;
+        animation: arm-magic-r 1.5s infinite ease-in-out;
+      }
+
+      /* Happy blinking eyes */
+      .eyes-blink {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: blink 2s infinite linear;
+      }
+
+      @keyframes magic-sway {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(2deg) translateY(-1px); }
+      }
+
+      @keyframes shadow-sway {
+        0%, 100% { transform: scaleX(1); opacity: 0.5; }
+        50% { transform: scaleX(0.9); opacity: 0.4; }
+      }
+
+      @keyframes hat-wobble {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(-5deg); }
+        75% { transform: rotate(5deg); }
+      }
+
+      @keyframes star-float {
+        0% { opacity: 0; transform: translate(0, 0) scale(0.3); }
+        20% { opacity: 1; transform: translate(0, -2px) scale(1); }
+        60% { opacity: 1; transform: translate(0, -8px) scale(1); }
+        100% { opacity: 0; transform: translate(0, -14px) scale(0.5); }
+      }
+
+      @keyframes arm-magic-l {
+        0%, 100% { transform: rotate(40deg) translate(-1px, -1px); }
+        50% { transform: rotate(60deg) translate(-1px, -2px); }
+      }
+      @keyframes arm-magic-r {
+        0%, 100% { transform: rotate(-40deg) translate(1px, -1px); }
+        50% { transform: rotate(-60deg) translate(1px, -2px); }
+      }
+
+      @keyframes blink {
+        0%, 42%, 58%, 100% { transform: scaleY(1); }
+        50% { transform: scaleY(0.1); }
+      }
+    </style>
+
+    <!-- Pixel star (cross shape) -->
+    <g id="px-star">
+      <rect x="-0.5" y="-0.5" width="1" height="1"/>
+      <rect x="-0.5" y="-1.5" width="1" height="1"/>
+      <rect x="-0.5" y="0.5" width="1" height="1"/>
+      <rect x="-1.5" y="-0.5" width="1" height="1"/>
+      <rect x="0.5" y="-0.5" width="1" height="1"/>
+    </g>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <rect id="ground-shadow" class="shadow-anim" x="3" y="15" width="9" height="1" fill="#000000"/>
+
+  <!-- Floating stars -->
+  <g class="star1"><use href="#px-star" x="3" y="-4" fill="#FFD700"/></g>
+  <g class="star2"><use href="#px-star" x="12" y="-6" fill="#FFF59D"/></g>
+  <g class="star3"><use href="#px-star" x="7" y="-8" fill="#FFA000"/></g>
+  <g class="star4"><use href="#px-star" x="-2" y="-3" fill="#FFF59D"/></g>
+  <g class="star5"><use href="#px-star" x="16" y="-2" fill="#FFD700"/></g>
+
+  <!-- Main Character -->
+  <g class="magic-body">
+    <!-- Magic Hat -->
+    <g class="hat">
+      <rect x="4" y="1" width="7" height="1" fill="#5C3D8F"/>
+      <rect x="5" y="0" width="5" height="1" fill="#5C3D8F"/>
+      <rect x="6" y="-1" width="3" height="1" fill="#7B52AB"/>
+      <rect x="7" y="-2" width="1" height="1" fill="#9C72C0"/>
+      <!-- Hat band -->
+      <rect x="4" y="1" width="7" height="1" fill="#FFD700"/>
+      <!-- Hat brim -->
+      <rect x="3" y="2" width="9" height="1" fill="#5C3D8F"/>
+    </g>
+
+    <g fill="#DE886D">
+      <!-- Legs -->
+      <rect x="3" y="13" width="1" height="2"/>
+      <rect x="5" y="13" width="1" height="2"/>
+      <rect x="9" y="13" width="1" height="2"/>
+      <rect x="11" y="13" width="1" height="2"/>
+      <!-- Torso -->
+      <rect x="2" y="6" width="11" height="7"/>
+      <!-- Arms raised -->
+      <g class="arm-l"><rect x="0" y="9" width="2" height="2"/></g>
+      <g class="arm-r"><rect x="13" y="9" width="2" height="2"/></g>
+    </g>
+
+    <!-- Happy ^^ eyes -->
+    <g class="eyes-blink" fill="#000000">
+      <rect x="4" y="8" width="2" height="1"/>
+      <rect x="4" y="9" width="1" height="1"/>
+      <rect x="9" y="8" width="2" height="1"/>
+      <rect x="10" y="9" width="1" height="1"/>
+    </g>
+  </g>
+</svg>

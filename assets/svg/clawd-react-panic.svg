@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500">
+  <defs>
+    <style>
+      /* Panicked shaking body */
+      .panic-body {
+        transform-box: fill-box;
+        transform-origin: 50% 100%;
+        animation: panic-shake 0.15s infinite alternate ease-in-out;
+      }
+
+      .shadow-anim {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: shadow-shake 0.15s infinite alternate ease-in-out;
+      }
+
+      /* Fast leg movement (running) */
+      .leg-l1 { animation: leg-run-1 0.2s infinite ease-in-out; }
+      .leg-l2 { animation: leg-run-2 0.2s infinite ease-in-out; }
+      .leg-r1 { animation: leg-run-2 0.2s infinite ease-in-out; }
+      .leg-r2 { animation: leg-run-1 0.2s infinite ease-in-out; }
+
+      /* Arms flailing wildly */
+      .arm-l {
+        transform-box: fill-box;
+        transform-origin: 100% 50%;
+        animation: flail-l 0.2s infinite alternate ease-in-out;
+      }
+      .arm-r {
+        transform-box: fill-box;
+        transform-origin: 0% 50%;
+        animation: flail-r 0.2s infinite alternate ease-in-out;
+      }
+
+      /* Sweat drops */
+      .sweat1 { animation: sweat-fly 0.8s infinite ease-out; animation-delay: 0s; }
+      .sweat2 { animation: sweat-fly 0.8s infinite ease-out; animation-delay: 0.3s; }
+      .sweat3 { animation: sweat-fly 0.8s infinite ease-out; animation-delay: 0.6s; }
+
+      @keyframes panic-shake {
+        0% { transform: translateX(-1px) rotate(-2deg); }
+        100% { transform: translateX(1px) rotate(2deg); }
+      }
+
+      @keyframes shadow-shake {
+        0% { transform: translateX(-1px); opacity: 0.5; }
+        100% { transform: translateX(1px); opacity: 0.5; }
+      }
+
+      @keyframes leg-run-1 {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-2px); }
+      }
+      @keyframes leg-run-2 {
+        0%, 100% { transform: translateY(-2px); }
+        50% { transform: translateY(0); }
+      }
+
+      @keyframes flail-l {
+        0% { transform: rotate(70deg) translate(-1px, -2px); }
+        100% { transform: rotate(30deg); }
+      }
+      @keyframes flail-r {
+        0% { transform: rotate(-30deg); }
+        100% { transform: rotate(-70deg) translate(1px, -2px); }
+      }
+
+      @keyframes sweat-fly {
+        0% { opacity: 1; transform: translate(0, 0); }
+        50% { opacity: 1; transform: translate(var(--sx, 3px), var(--sy, -5px)); }
+        100% { opacity: 0; transform: translate(var(--ex, 5px), var(--ey, -3px)); }
+      }
+    </style>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <rect id="ground-shadow" class="shadow-anim" x="3" y="15" width="9" height="1" fill="#000000"/>
+
+  <!-- Sweat drops flying off -->
+  <g class="sweat1" style="--sx: -4px; --sy: -5px; --ex: -7px; --ey: -2px;">
+    <rect x="2" y="4" width="1" height="2" fill="#4FC3F7"/>
+  </g>
+  <g class="sweat2" style="--sx: 5px; --sy: -6px; --ex: 8px; --ey: -3px;">
+    <rect x="13" y="3" width="1" height="2" fill="#29B6F6"/>
+  </g>
+  <g class="sweat3" style="--sx: 2px; --sy: -7px; --ex: 3px; --ey: -4px;">
+    <rect x="7" y="2" width="1" height="2" fill="#4FC3F7"/>
+  </g>
+
+  <!-- Main Character -->
+  <g class="panic-body">
+    <g fill="#DE886D">
+      <!-- Legs (fast running) -->
+      <g class="leg-l1"><rect x="3" y="13" width="1" height="2"/></g>
+      <g class="leg-l2"><rect x="5" y="13" width="1" height="2"/></g>
+      <g class="leg-r1"><rect x="9" y="13" width="1" height="2"/></g>
+      <g class="leg-r2"><rect x="11" y="13" width="1" height="2"/></g>
+      <!-- Torso -->
+      <rect x="2" y="6" width="11" height="7"/>
+      <!-- Arms flailing -->
+      <g class="arm-l"><rect x="0" y="9" width="2" height="2"/></g>
+      <g class="arm-r"><rect x="13" y="9" width="2" height="2"/></g>
+    </g>
+    <!-- >< panicked eyes -->
+    <g fill="#000000">
+      <rect x="4" y="8" width="1" height="1"/>
+      <rect x="5" y="9" width="1" height="1"/>
+      <rect x="4" y="10" width="1" height="1"/>
+      <rect x="11" y="8" width="1" height="1"/>
+      <rect x="10" y="9" width="1" height="1"/>
+      <rect x="11" y="10" width="1" height="1"/>
+    </g>
+    <!-- Open panicked mouth -->
+    <rect x="6" y="11" width="3" height="1" fill="#000000"/>
+  </g>
+</svg>

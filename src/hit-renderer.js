@@ -117,13 +117,23 @@ area.addEventListener("pointercancel", () => stopDrag());
 area.addEventListener("lostpointercapture", () => { if (isDragging) stopDrag(); });
 window.addEventListener("blur", stopDrag);
 
-// --- Click reaction logic (2-click = poke, 4-click = flail) ---
+// --- Click reaction logic (2-click = poke, 3-click = random, 4-click = flail) ---
 const CLICK_WINDOW_MS = 400;
 const REACT_LEFT_SVG = "clawd-react-left.svg";
 const REACT_RIGHT_SVG = "clawd-react-right.svg";
 const REACT_DOUBLE_SVG = "clawd-react-double.svg";
 const REACT_SINGLE_DURATION = 2500;
 const REACT_DOUBLE_DURATION = 3500;
+
+// Triple-click random reaction pool: [svg, duration]
+const REACT_RANDOM_POOL = [
+  ["clawd-happy-hearts.svg",   3000],   // happy hearts
+  ["clawd-idle-yawn.svg",      3000],   // yawn (bored by your poking)
+  ["clawd-idle-look.svg",      3000],   // confused look around
+  ["clawd-react-panic.svg",    2500],   // panic dodge and run away
+  ["clawd-react-magic.svg",    3000],   // magic hat with stars
+  ["clawd-react-confused.svg", 3000],   // dizzy tangle above head
+];
 
 let clickCount = 0;
 let clickTimer = null;
@@ -154,6 +164,15 @@ function handleClick(clientX) {
     clickCount = 0;
     firstClickDir = null;
     playReaction(REACT_DOUBLE_SVG, REACT_DOUBLE_DURATION);
+  } else if (clickCount === 3) {
+    clickTimer = setTimeout(() => {
+      clickTimer = null;
+      clickCount = 0;
+      firstClickDir = null;
+      // Random reaction from pool
+      const pick = REACT_RANDOM_POOL[Math.floor(Math.random() * REACT_RANDOM_POOL.length)];
+      playReaction(pick[0], pick[1]);
+    }, CLICK_WINDOW_MS);
   } else if (clickCount >= 2) {
     clickTimer = setTimeout(() => {
       clickTimer = null;

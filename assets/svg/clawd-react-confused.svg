@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500">
+  <defs>
+    <style>
+      /* Body slight tilt back and forth */
+      .confused-body {
+        transform-box: fill-box;
+        transform-origin: 50% 100%;
+        animation: confused-tilt 2s infinite ease-in-out;
+      }
+
+      .shadow-anim {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: shadow-tilt 2s infinite ease-in-out;
+      }
+
+      /* Three tangles spinning at different speeds */
+      .tangle-big {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: tangle-spin 1.2s infinite linear;
+      }
+      .tangle-med {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: tangle-spin-rev 0.9s infinite linear;
+      }
+      .tangle-sm {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: tangle-spin 1.5s infinite linear;
+      }
+
+      /* Question mark bobbing */
+      .qmark {
+        animation: qmark-bob 1s infinite ease-in-out;
+      }
+
+      /* Spiral eyes */
+      .eye-l {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: spiral-l 0.8s infinite linear;
+      }
+      .eye-r {
+        transform-box: fill-box;
+        transform-origin: 50% 50%;
+        animation: spiral-r 0.8s infinite linear;
+      }
+
+      /* Arms drooping */
+      .arm-l {
+        transform-box: fill-box;
+        transform-origin: 100% 50%;
+        animation: droop-l 2s infinite ease-in-out;
+      }
+      .arm-r {
+        transform-box: fill-box;
+        transform-origin: 0% 50%;
+        animation: droop-r 2s infinite ease-in-out;
+      }
+
+      @keyframes confused-tilt {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(-4deg) translateX(-1px); }
+        75% { transform: rotate(4deg) translateX(1px); }
+      }
+
+      @keyframes shadow-tilt {
+        0%, 100% { transform: scaleX(1) translateX(0); opacity: 0.5; }
+        25% { transform: scaleX(1) translateX(-1px); opacity: 0.5; }
+        75% { transform: scaleX(1) translateX(1px); opacity: 0.5; }
+      }
+
+      @keyframes tangle-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes tangle-spin-rev {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(-360deg); }
+      }
+
+      @keyframes qmark-bob {
+        0%, 100% { transform: translateY(0); opacity: 1; }
+        50% { transform: translateY(-2px); opacity: 0.7; }
+      }
+
+      @keyframes spiral-l {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes spiral-r {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(-360deg); }
+      }
+
+      @keyframes droop-l {
+        0%, 100% { transform: rotate(-10deg); }
+        50% { transform: rotate(-20deg); }
+      }
+      @keyframes droop-r {
+        0%, 100% { transform: rotate(10deg); }
+        50% { transform: rotate(20deg); }
+      }
+    </style>
+  </defs>
+
+  <!-- Ground Shadow -->
+  <rect id="ground-shadow" class="shadow-anim" x="3" y="15" width="9" height="1" fill="#000000"/>
+
+  <!-- Three tangles above head: big (center), medium (right), small (left) -->
+  <!-- Big tangle - center above head -->
+  <g class="tangle-big">
+    <rect x="5" y="-5" width="3" height="1" fill="#444"/>
+    <rect x="4" y="-4" width="2" height="1" fill="#555"/>
+    <rect x="7" y="-4" width="2" height="1" fill="#444"/>
+    <rect x="5" y="-3" width="1" height="1" fill="#666"/>
+    <rect x="8" y="-3" width="1" height="1" fill="#555"/>
+    <rect x="6" y="-6" width="2" height="1" fill="#555"/>
+    <rect x="4" y="-5" width="1" height="1" fill="#666"/>
+    <rect x="9" y="-5" width="1" height="1" fill="#666"/>
+    <rect x="6" y="-2" width="1" height="1" fill="#444"/>
+    <rect x="8" y="-2" width="1" height="1" fill="#555"/>
+  </g>
+  <!-- Medium tangle - upper right -->
+  <g class="tangle-med">
+    <rect x="13" y="-7" width="2" height="1" fill="#555"/>
+    <rect x="12" y="-6" width="1" height="1" fill="#444"/>
+    <rect x="14" y="-6" width="1" height="1" fill="#666"/>
+    <rect x="13" y="-5" width="1" height="1" fill="#444"/>
+    <rect x="12" y="-7" width="1" height="1" fill="#666"/>
+    <rect x="14" y="-5" width="1" height="1" fill="#555"/>
+  </g>
+  <!-- Small tangle - upper left -->
+  <g class="tangle-sm">
+    <rect x="0" y="-4" width="2" height="1" fill="#666"/>
+    <rect x="-1" y="-3" width="1" height="1" fill="#555"/>
+    <rect x="2" y="-3" width="1" height="1" fill="#444"/>
+    <rect x="0" y="-2" width="1" height="1" fill="#555"/>
+  </g>
+
+  <!-- Question mark to the right -->
+  <g class="qmark" fill="#888">
+    <rect x="14" y="-2" width="2" height="1"/>
+    <rect x="15" y="-1" width="1" height="1"/>
+    <rect x="14" y="0" width="1" height="1"/>
+    <rect x="14" y="2" width="1" height="1"/>
+  </g>
+
+  <!-- Main Character -->
+  <g class="confused-body">
+    <g fill="#DE886D">
+      <!-- Legs -->
+      <rect x="3" y="13" width="1" height="2"/>
+      <rect x="5" y="13" width="1" height="2"/>
+      <rect x="9" y="13" width="1" height="2"/>
+      <rect x="11" y="13" width="1" height="2"/>
+      <!-- Torso -->
+      <rect x="2" y="6" width="11" height="7"/>
+      <!-- Arms drooping -->
+      <g class="arm-l"><rect x="0" y="9" width="2" height="2"/></g>
+      <g class="arm-r"><rect x="13" y="9" width="2" height="2"/></g>
+    </g>
+
+    <!-- Spiral/dizzy eyes (@_@) -->
+    <g fill="#000000">
+      <!-- Left eye: small spiral pattern -->
+      <g class="eye-l">
+        <rect x="4" y="8" width="1" height="1"/>
+        <rect x="5" y="8" width="1" height="1"/>
+        <rect x="5" y="9" width="1" height="1"/>
+        <rect x="4" y="9" width="1" height="1"/>
+        <rect x="4.5" y="8.5" width="1" height="1" fill="#DE886D"/>
+      </g>
+      <!-- Right eye: small spiral pattern -->
+      <g class="eye-r">
+        <rect x="9" y="8" width="1" height="1"/>
+        <rect x="10" y="8" width="1" height="1"/>
+        <rect x="10" y="9" width="1" height="1"/>
+        <rect x="9" y="9" width="1" height="1"/>
+        <rect x="9.5" y="8.5" width="1" height="1" fill="#DE886D"/>
+      </g>
+    </g>
+
+    <!-- Open confused mouth -->
+    <rect x="6" y="11" width="3" height="1" fill="#000000"/>
+  </g>
+</svg>

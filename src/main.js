@@ -541,9 +541,10 @@ function createWindow() {
     if (bubbleFollowPet && pendingPermissions.length) repositionBubbles();
   });
 
-  ipcMain.on("pause-cursor-polling", () => { idlePaused = true; });
+  ipcMain.on("pause-cursor-polling", () => { idlePaused = true; _wander.pause(); });
   ipcMain.on("resume-from-reaction", () => {
     idlePaused = false;
+    _wander.resume();
     if (_mini.getMiniTransitioning()) return;
     sendToRenderer("state-change", _state.getCurrentState(), _state.getCurrentSvg());
   });
@@ -558,6 +559,33 @@ function createWindow() {
   ipcMain.on("end-drag-reaction", () => sendToRenderer("end-drag-reaction"));
   ipcMain.on("play-click-reaction", (_, svg, duration) => {
     sendToRenderer("play-click-reaction", svg, duration);
+    // Panic reaction: also run away a short distance
+    if (svg === "clawd-react-panic.svg") {
+      const bounds = win.getBounds();
+      const display = screen.getPrimaryDisplay();
+      const wa = display.workAreaSize;
+      // Run 80-150px in a random direction
+      const dist = 80 + Math.random() * 70;
+      const angle = Math.random() * 2 * Math.PI;
+      const rawX = bounds.x + Math.cos(angle) * dist;
+      const rawY = bounds.y + Math.sin(angle) * dist;
+      const targetX = Math.round(Math.max(30, Math.min(wa.width - bounds.width - 30, rawX)));
+      const targetY = Math.round(Math.max(30, Math.min(wa.height - bounds.height - 30, rawY)));
+      const steps = 25;
+      let step = 0;
+      const startX = bounds.x, startY = bounds.y;
+      const runTimer = setInterval(() => {
+        if (!win || win.isDestroyed()) { clearInterval(runTimer); return; }
+        step++;
+        const t = step / steps;
+        win.setPosition(
+          Math.round(startX + (targetX - startX) * t),
+          Math.round(startY + (targetY - startY) * t)
+        );
+        syncHitWin();
+        if (step >= steps) clearInterval(runTimer);
+      }, 50);
+    }
   });
 
   ipcMain.on("drag-end", () => {
